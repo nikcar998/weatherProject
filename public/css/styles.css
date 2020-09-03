@@ -1,0 +1,16 @@
+.central-form{
+    text-align:center;
+    margin: auto auto;
+}
+
+
+
+
+.invisible{
+    opacity: 0;
+    background-color: brown;
+}
+.visible{
+    opacity:1;
+    background-color: yellow
+}
