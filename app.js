@@ -2,6 +2,8 @@ const express= require("express");
 const bodyParser= require("body-parser");
 let ejs = require('ejs');
 var https = require('https');
+var fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 
@@ -9,46 +11,73 @@ app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-var weatherDescription='';
-var temp= 0;
-var imgURL='';
-var visibility="invisible";
 
-
+//Imposto la home page come lindex.ejs
 app.get("/", function(req, res){
-    visibility="invisible";
-    res.render("lindex",{weatherDescription:weatherDescription, temp:temp, imgURL:imgURL, visibility:visibility })
+
+    res.render("lindex");
+});
+//definisco le azione successive all'inserimento della città nel form
+app.post("/", function(req, res){
+
+    
+    const query= req.body.cityName;
+    const apiKey= process.env.API_KEY;
+    const unit = "metric";
+    const url="https://api.openweathermap.org/data/2.5/weather?q="+ query + " &appid="+ apiKey +"&units="+unit ;
+    
+    //avvio una https request e ne sfrutto il risultato
+    https.get(url, function(response){
+         console.log(response.statusCode);
+
+         //se lo statusCode in risposta corrisponde ad esito positivo (200) avvia la funzione e restituisce i valori necessari in postindex.ejs
+        if(response.statusCode===200){
+        response.on("data", function(data){
+            const weatherData=JSON.parse(data);
+            console.log(weatherData);
+
+            const sunrise=weatherData.sys.sunrise;
+            let date = new Date(sunrise * 1000);
+            let hours = date.getHours();
+            let minutes =date.getMinutes();
+            const sunrise1= ""+hours+":"+minutes+"";
+
+            const sunset=weatherData.sys.sunset;
+            let date1 = new Date(sunset * 1000);
+            let hours1 = date1.getHours();
+            let minutes1 =date1.getMinutes();
+            const sunset1= ""+hours1+":"+minutes1+"";
+
+            const wind=weatherData.wind.speed;
+
+            const city=query;
+            const temp= weatherData.main.temp;
+            const weatherDescription = weatherData.weather[0].description;
+            const icon=weatherData.weather[0].icon;
+            const imgURL="https://openweathermap.org/img/wn/"+ icon + "@2x.png";
+            res.render("postIndex", {
+                weatherDescription:weatherDescription,
+                temp:temp, 
+                imgURL:imgURL, 
+                city:city,
+                sunrise:sunrise1, 
+                sunset:sunset1, 
+                wind:wind
+            });
+            });
+            //in caso il codice non sia positivo rendo la pagina che mostre una scritta introduttiva e il codice di errore
+        }else{
+            res.render("errors.ejs", {err:response.statusCode})
+        }
+    });
+
+      
+  
 });
 
 
 
-app.post("/", function(req, res){
-
-    const query= req.body.cityName;
-    const apiKey="52af0baba452d35f307481f2a348c775";
-    const appUnit="metric";
-
-    const url="https://api.openweathermap.org/data/2.5/weather?q="+ query + " &appid="+ apiKey +"&units="+ appUnit;
-
-    https.get(url, function(response){
-         console.log(response.statusCode);
-
-        response.on("data", function(data){
-            const weatherData=JSON.parse(data);
-             temp= weatherData.main.temp;
-             weatherDescription = weatherData.weather[0].description;
-            const icon=weatherData.weather[0].icon;
-            imgURL="https://openweathermap.org/img/wn/"+ icon + "@2x.png";
-            visibility="visible";
-            res.render("lindex", {weatherDescription:weatherDescription, temp:temp, imgURL:imgURL, visibility:visibility });
-            visibility="invisible";
-            })
-    })
-})
-
-
-
-
-app.listen(3000, function(){
+//avvio il server locale 
+app.listen(process.env.PORT || 3000, function(){
     console.log("server running on port 3000")
 })

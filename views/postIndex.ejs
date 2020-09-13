@@ -1,0 +1,17 @@
+<%- include('header') %>
+        <!--lista del meteo della città scelta con valori ottenuti dal file app.js-->
+        <ul class="list-group show-on-scroll is-visible ">
+            <li class="list-group-item "><h1><%=city%></h1></li>
+            <li class="list-group-item ">Weather: <%=weatherDescription%> <img class="iconcss" src=<%=imgURL%>></li>
+            <li class="list-group-item ">Temperature: <%=temp%> °C<img src="css/img/thermometer.svg" class="iconcss"></li>
+            <li class="list-group-item ">Wind speed: <%=wind%> m/s <img src="css/img/wind.svg" class="iconcss"></li>
+            <li class="list-group-item ">Sunrise time: <%=sunrise%> AM <img src="css/img/sunrise.svg" class="iconcss"></li>
+            <li class="list-group-item ">Sunset time: <%=sunset%> PM <img src="css/img/sunset.svg" class="iconcss"></li>
+          </ul>
+
+
+
+
+
+</body>
+</html>

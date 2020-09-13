@@ -1,21 +1,13 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>
-            weather APP
-        </title>
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <form action="/" method="post" class="central-form">
-            <label for="cityInput">City Name</label>
-            <input id="cityInput" type="text" name="cityName" placeholder="e.g.='Milan,it'">
-            <button type="submit" name="button">go</button>
-            <div class=<%= visibility %>>
-                <p> the weather description: <%= weatherDescription %></p>
-                <p> the temperature: <%= temp %></p>
-                <img src=imgURL>
-            </div>
-        </form>
-    </body>
+<%- include('header') %>
+     <!--lista contenente il meteo dell'utente che verrà aggiornata grazie al file index.js-->
+        <ul class="list-group show-on-scroll">
+            <li class="list-group-item"> <h1>At your place</h1></li>
+          </ul>
+
+
+
+
+        <script type="text/javascript" src="js/config.js"></script>
+        <script  type="text/javascript" src="js/index.js" ></script> 
+</body>
 </html>

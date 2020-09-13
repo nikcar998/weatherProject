@@ -1,16 +1,155 @@
-.central-form{
+/*definisco immagine di background e overflow della pagina*/
+body{
+    margin:5%;
+    padding:0;
+    overflow:scroll;
+    background-image:url('img/nature.jpg');
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Caveat';
+} 
+/*def titolo*/
+.titleh{
     text-align:center;
-    margin: auto auto;
+    margin:4% auto 2%;
+    font-family: 'Pacifico', cursive;
+    font-size:600%;
+    font-weight:700; 
 }
-
-
-
-
-.invisible{
-    opacity: 0;
-    background-color: brown;
+.span24{
+    font-family: 'Yellowtail', cursive;
+    font-size:140%;
 }
-.visible{
+a{
+    text-decoration:none;
+    color:inherit;
+}
+a:hover{
+    text-decoration: none;
+}
+/*def. input form*/
+.central-form{
+    width:30%;
+    margin:auto auto 1%;
+}
+#cityInput{
+    width:80%;
+    padding:2%;
+    font-size:150%;
+}
+.btn{
+    font-size:150%;
+}
+/*def. elementi all'interno della lista del meteo*/
+.list-group{
+    text-align:center;
+    margin:8% auto;
+    width:28%;
+}
+.list-group-item{
+    font-size:200%;
+    width:100%;
+}
+.list-group-item:first-letter {
+    text-transform:capitalize;
+}
+h1{
+    font-family:'Pacifico', cursive;
+    font-size:200%;
+    font-weight: 700;
+}
+.iconcss{
+    width:12%;
+}
+/*def. capitolo che appare poco dopo l'avvio della pagina*/
+/*l'animazione avverrà solo nella home page ma la classe verrà mantenuta per lasciare invariati margine e posizione tra le pagine*/
+.show-on-scroll{
+    opacity:0;
+    transform: translateY(4em);
+    transition: transform 3s .25s cubic-bezier(0,1,.3,1), 
+                opacity .3s .25s ease-out;
+    will-change:transform, opacity;
+  }
+  .show-on-scroll.is-visible{
     opacity:1;
-    background-color: yellow
+    transform: translateY(-4em);
+  }
+
+
+/*cambio impostazioni per telefoni*/
+@media only screen and (max-width: 501px) and (min-width: 200px){
+    /*nuova immagine di background*/
+    body{
+        background-image: url('img/phone-img.jpg');
+    }
+    .central-form{
+        display:block;
+        width:100%;
+        margin:auto auto 2%;
+    }
+    #cityInput{
+        width:30%;
+        padding:2%;
+        font-size:150%;
+    }
+    .list-group{
+        display:block;
+        margin-top:27%;
+        width:90%;
+    }
+    .list-group-item{
+        width:100%;
+        margin:0;
+    }
+    .titleh{
+        margin:4% auto 5%;
+        font-size:330%;
+        font-weight:700; 
+    }
+    .span24{
+        font-family: 'Yellowtail', cursive;
+        font-size:120%;
+    }
+    h1{
+    font-size:140%;
 }
+.iconcss{
+    width:25%;
+}
+}
+/*cambio impostazioni per grandezze intermedie*/
+@media only screen and (max-width: 1050px) and (min-width: 551px) { 
+    .central-form{
+        width:80%;
+        margin:auto auto 1%;
+    }
+    .titleh{
+        font-size:550%;
+    }
+   .list-group{
+        margin:15% auto;
+        width:70%;
+    }
+    .list-group-item{
+        font-size:25;
+        width:100%;
+        margin:0;
+    }
+ }
+
+ @media only screen and (max-width: 1500px) and (min-width: 1050px) { 
+
+    .list-group{
+        width:60%;
+    }
+    .central-form{
+        width:70%;
+        margin:auto auto 1%;
+    }
+
+
+ }
