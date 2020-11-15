@@ -17,12 +17,12 @@ body{
     text-align:center;
     margin:4% auto 2%;
     font-family: 'Pacifico', cursive;
-    font-size:600%;
+    font-size:400%;
     font-weight:700; 
 }
 .span24{
     font-family: 'Yellowtail', cursive;
-    font-size:140%;
+    font-size:120%;
 }
 a{
     text-decoration:none;
@@ -33,22 +33,22 @@ a:hover{
 }
 /*def. input form*/
 .central-form{
-    width:30%;
     margin:auto auto 1%;
+    width:40%;
 }
 #cityInput{
-    width:80%;
-    padding:2%;
-    font-size:150%;
+    width:1rem;
+    padding:1%;
+    font-size:120%;
 }
 .btn{
-    font-size:150%;
+    font-size:120%;
 }
 /*def. elementi all'interno della lista del meteo*/
 .list-group{
     text-align:center;
     margin:8% auto;
-    width:28%;
+    width:40%
 }
 .list-group-item{
     font-size:200%;
@@ -59,7 +59,7 @@ a:hover{
 }
 h1{
     font-family:'Pacifico', cursive;
-    font-size:200%;
+    font-size:150%;
     font-weight: 700;
 }
 .iconcss{
@@ -141,13 +141,13 @@ h1{
     }
  }
 
- @media only screen and (max-width: 1500px) and (min-width: 1050px) { 
+ @media only screen and (max-width: 1200px) and (min-width: 1050px) { 
 
     .list-group{
-        width:60%;
+        width:50%;
     }
     .central-form{
-        width:70%;
+        width:50%;
         margin:auto auto 1%;
     }
 

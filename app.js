@@ -1,9 +1,10 @@
 const express= require("express");
 const bodyParser= require("body-parser");
+const _ =require("lodash")
 let ejs = require('ejs');
 var https = require('https');
 var fs = require('fs');
-require('dotenv').config();
+
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.post("/", function(req, res){
 
     
     const query= req.body.cityName;
-    const apiKey= process.env.API_KEY;
+    const apiKey= '';
     const unit = "metric";
     const url="https://api.openweathermap.org/data/2.5/weather?q="+ query + " &appid="+ apiKey +"&units="+unit ;
     
@@ -36,24 +37,24 @@ app.post("/", function(req, res){
             const weatherData=JSON.parse(data);
             console.log(weatherData);
 
-            const sunrise=weatherData.sys.sunrise;
+            const sunrise=_.get(weatherData,"sys.sunrise","");
             let date = new Date(sunrise * 1000);
             let hours = date.getHours();
             let minutes =date.getMinutes();
             const sunrise1= ""+hours+":"+minutes+"";
 
-            const sunset=weatherData.sys.sunset;
+            const sunset=_.get(weatherData,"sys.sunset","");
             let date1 = new Date(sunset * 1000);
             let hours1 = date1.getHours();
             let minutes1 =date1.getMinutes();
             const sunset1= ""+hours1+":"+minutes1+"";
 
-            const wind=weatherData.wind.speed;
+            const wind=_.get(weatherData,"wind.speed","");
 
             const city=query;
-            const temp= weatherData.main.temp;
-            const weatherDescription = weatherData.weather[0].description;
-            const icon=weatherData.weather[0].icon;
+            const temp= _.get(weatherData,"main.temp","");
+            const weatherDescription = _.get(weatherData,"weather[0].description","");
+            const icon=_.get(weatherData,"weather[0].icon","");
             const imgURL="https://openweathermap.org/img/wn/"+ icon + "@2x.png";
             res.render("postIndex", {
                 weatherDescription:weatherDescription,

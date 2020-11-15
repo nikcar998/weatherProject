@@ -6,7 +6,7 @@ function geoFindMe() {
       const longitude = position.coords.longitude;
   
      //utilizzo la chiave e le coordinate per accedere all'api
-      var key = config.API_KEY;
+      var key = '';
       fetch('https://api.openweathermap.org/data/2.5/weather?lat='+ latitude +'&lon='+ longitude +'&appid='+ key)  
         .then(function(resp) { return resp.json() }) // Convert data to json
           .then(function(data) {
